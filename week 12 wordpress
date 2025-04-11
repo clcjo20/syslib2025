@@ -1,0 +1,117 @@
+#Objective:
+Install and configure a WordPress site that will serve as the central public-facing hub for your library ecosystem.
+
+##Instructions:
+Follow the detailed step-by-step instructions and accompanying video walk-through provided below. Your WordPress site should be live, accessible, and configured with basic site information such as title, tagline, and a custom homepage. Document the process on GitHub and make notes of any issues you encountered and how you resolved them. Use clearly structured Markdown for this.
+
+Do not submit screenshots.
+
+###Deliverables:
+A working UR for your WordPress installation
+A link to your GitHub notes/documentation
+A brief write-up (100-200 words) summarizing your experience and any challenges.
+Evaluations of written components:
+Submissions that demonstrate thoughtfulness, specificity, and depth of reflection are more likely to receive a Complete. Consider questions like:
+
+####Describe a specific problem you encountered and how you addressed it.
+Identify one thing that surprised you or was different from a previous assignment.
+Reflect on how this component contributes to real-world library operations.
+
+1. Install WordPress
+Prerequisites
+Ensure that you have the following ready:
+
+LAMP stack (Linux, Apache, MySQL, PHP) installed on your server.
+
+A database created for your WordPress site (as detailed in previous steps).
+
+The WordPress files downloaded and placed in the correct directory (/var/www/html/wordpress).
+
+# Download WordPress
+cd /var/www/html
+wget https://wordpress.org/latest.tar.gz
+
+# Extract the files
+tar -xvzf latest.tar.gz
+
+# Move WordPress files to the right directory
+mv wordpress/* .
+rm -rf wordpress
+rm -f latest.tar.gz
+
+# Set correct file permissions
+sudo chown -R www-data:www-data /var/www/html/
+sudo chmod -R 755 /var/www/html/
+
+
+2. Configure the Database and wp-config.php
+
+mysql -u root -p
+CREATE DATABASE wordpress;
+CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+Edit wp-config.php
+
+sudo nano /var/www/html/wp-config.php
+
+sudo a2ensite wordpress.conf
+sudo systemctl restart apache2
+
+
+4. Run the WordPress Installation Wizard
+Now, visit your server’s IP address (http://34.56.76.45/wordpress) in a browser.
+
+You will be greeted by the WordPress installation wizard. Choose your language, set your site title, admin username, password, and email.
+
+
+5. Customize Your WordPress Site
+Title and Tagline: Go to Settings > General and make sure your site’s title is set to something like "C. Charles Library" and the tagline to something appropriate, like "Your Local Library Hub."
+
+Homepage Setup: Go to Settings > Reading and set the homepage to display a static page (choose a custom page you create later) or set it to display your latest posts.
+
+Theme: Install a theme that fits your library's brand. I recommend a clean, professional theme, like Astra or OceanWP, available from the WordPress theme repository.
+
+
+6. Document the Process on GitHub
+# C. Charles Library Website Setup
+
+## Installation Process
+
+1. Installed WordPress using LAMP stack on Ubuntu 20.04.
+2. Created a database named `wordpress` and user `wordpress` with appropriate privileges.
+3. Configured `wp-config.php` with correct database details.
+4. Set up Apache VirtualHost to point to the WordPress directory.
+5. Followed WordPress installation wizard to complete the setup.
+
+## Customization
+
+1. Set the site title as "C. Charles Library" and tagline as "Your Local Library Hub."
+2. Set homepage to static and added initial content.
+3. Installed **Astra** theme for a clean and modern layout.
+4. Created a custom menu and added essential pages: About, Catalog, Contact.
+
+## Challenges Encountered
+
+1. **Database Connection Error**: Initially had issues with database connection due to incorrect database credentials in `wp-config.php`. Resolved by verifying database name, user, and password.
+2. **Theme Customization**: The default theme didn’t match the branding of C. Charles Library, so I installed and customized the **Astra** theme. It required some time to tweak the header and footer settings to match our design.
+
+## Next Steps
+
+- Set up SEO plugins like **Yoast SEO** to improve search visibility.
+- Configure additional plugins for contact forms and event listings.
+
+7. Write a Brief Reflection (100-200 words)
+
+Setting up the C. Charles Library website on WordPress was a straightforward process, though a few technical challenges came up. One of the main issues was the "Error Establishing Database Connection" message. This was caused by incorrect credentials in the wp-config.php file, which I resolved by double-checking the database settings in both MySQL and the WordPress config file. Once that was fixed, I was able to run the WordPress installation wizard with no further issues.
+
+One thing that surprised me was how quickly I could set up a functional website with just a few plugins and customizations. I had expected it to take much longer. The ability to create a static homepage and customize the look and feel using a theme like Astra was very efficient. This is incredibly useful in the context of a library website, where ease of access and clean design are essential for user experience.
+
+In a real-world library setting, this would streamline the process of building a functional public-facing site, with resources like book catalogs, event listings, and easy access to contact details.
+
+
+the things i had trouble with was i had to restart my virtual machine becausee soething was wrong on the server side of things . also i lost my wordpress site and i'm having to start it over from scratch , this made me frustrated.  so this is the biggest trouble ive encountered  . 
+
+so i had to reinstall the vm and trying to enable the connection to my wordpress site .
