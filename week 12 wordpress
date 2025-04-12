@@ -17,45 +17,126 @@ Submissions that demonstrate thoughtfulness, specificity, and depth of reflectio
 Identify one thing that surprised you or was different from a previous assignment.
 Reflect on how this component contributes to real-world library operations.
 
-1. Install WordPress
-Prerequisites
-Ensure that you have the following ready:
+Step 1: Requirements
 
-LAMP stack (Linux, Apache, MySQL, PHP) installed on your server.
+All major software has dependencies. For example, our bare bones OPAC depends on MySQL and PHP to provide the database (MySQL) and the glue (PHP) between our HTML and the database. The same is true for WordPress. However, since WordPress is much more complicated software than our bare bones OPAC, its dependencies are stricter. This means that when we plan to download software outside of the apt ecosystem, we need to make sure that our systems meet the requirements for our installation. The WordPress.org Requirements page states that the WordPress installation requires at least PHP version 7.4 and MySQL version 8.0 or greater. We can check that our systems meet these requirements with the following commands. To check our installed version of PHP:
 
-A database created for your WordPress site (as detailed in previous steps).
+php --version
+To check our installed version of MySQL:
 
-The WordPress files downloaded and placed in the correct directory (/var/www/html/wordpress).
+mysql --version
+The output from php --version shows that my systems have PHP 8.1.2, which is greater than PHP 7.4. The output from mysql --version show that our systems have MySQL 8.0.41, which is greater than MySQL 8.0. This should be the same for you if you're running the Ubuntu 22.04.5 LTS Linux distribution. You can check that with the following command:
 
-# Download WordPress
+cat /etc/issue.net
+Since the system meets the PHP and MySQL requirements, it means I can proceed.
+
+As always, be sure to update your system with the apt commands: sudo apt update etc.
+
+Next, we need to add some additional PHP modules to our system to let WordPress operate at full functionality. We can install these using the apt command:
+
+sudo apt install php-curl php-xml php-imagick php-mbstring php-zip php-intl
+Then restart Apache2 and MySQL:
+
+sudo systemctl restart apache2
+sudo systemctl restart mysql
+Step 2: Download and Extract
+
+The next step is to download and extract the WordPress software, which is downloaded as a zip file. Although we only download one file, when we extract it with the unzip command, the extraction will result in a new directory that contains multiple files and subdirectories. The general instructions include:
+
+Change to the /var/www/html directory.
+Download the latest version of WordPress using the wget program.
+Extract the package using the unzip program.
+Specifically, we do the following on the command line:
+
 cd /var/www/html
-wget https://wordpress.org/latest.tar.gz
+sudo wget https://wordpress.org/latest.zip
+sudo unzip latest.zip
+As noted in the WordPress documentation, this will create a directory called wordpress in the same directory. Therefore the full path of your installation will located at /var/www/html/wordpress.
 
-# Extract the files
-tar -xvzf latest.tar.gz
+Step 3: Create the Database and a User
 
-# Move WordPress files to the right directory
-mv wordpress/* .
-rm -rf wordpress
-rm -f latest.tar.gz
+The WordPress documentation describes how to use phpMyAdmin to create the database and a user for WordPress. phpMyAdmin is a graphical front end to the MySQL relational database that you would access through the browser. We are not going to install that because I like to minimize the software that we install on servers to reduce the server's security exposure. Though you can use phpMyAdmin from a different machine and connect to the server, this is a command line class. Therefore, we are going to create the WordPress database and a database user using the same process we used to create a database and user for our bare bones ILS. You already know this, but the general instructions are:
 
-# Set correct file permissions
-sudo chown -R www-data:www-data /var/www/html/
-sudo chmod -R 755 /var/www/html/
+Switch to the root Linux user
+Login as the MySQL root user
+Specifically, we do the following on the command line:
 
+sudo su
+mysql -u root
+The mysql -u root command places us in the MySQL command prompt. The next general instructions are to:
 
-2. Configure the Database and wp-config.php
+Create a new user for the WordPress database
+Be sure to replace the Xs with a strong password
+Create a new database for WordPress
+Grant all privileges to the new user for the new database
+Examine the output
+Exit the MySQL prompt
+Specifically, this means the following (be sure to replaces the Xs with a unique and strong password of your own):
 
-mysql -u root -p
-CREATE DATABASE wordpress;
-CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
+create user 'wordpress'@'localhost' identified by 'XXXXXXXXX';
+create database wordpress;
+grant all privileges on wordpress.* to 'wordpress'@'localhost';
+show databases;
+\q
+Step 4: Set up wp-config.php
 
-Edit wp-config.php
+When we created our bare bones ILS, we created a file called login.php that contained the name of the database (e.g., opacdb), the name of the database user (e.g., opacuser), and the user's password. WordPress follows a similar process, but instead of login.php, it uses a file called wp-config.php.
 
-sudo nano /var/www/html/wp-config.php
+Follow these general steps:
+
+Change to the wordpress directory, if you haven't already.
+Copy and rename the wp-config-sample.php file to wp-config.php.
+Edit the file and add your WordPress database name, user name, and password in the fields for:
+DB_NAME,
+DB_USER, and
+DB_PASSWORD.
+This means that we specifically do the following:
+
+cd /var/www/html/wordpress
+sudo cp wp-config-sample.php wp-config.php
+sudo nano wp-config.php
+Using nano, add your database name, user, and password in the appropriate fields, just like we did with our login.php file for our bare bones OPAC.
+
+Additionally, we want to disable FTP uploads to the site for security reasons. To do that, navigate to the end of the file and add the following line:
+
+define('FS_METHOD','direct');
+Step 5: Optional
+
+The WordPress files are now installed at /var/www/html/wordpress. This means that your site would be located at a URL like:
+
+http://11.111.111.11/wordpress
+If you want to, you can rename your wordpress directory to something else. The WordPress documentation uses blog as an example. But it could be something else, like the name of a fictional library that you might be using WordPress for to build a site. If you decide to change it, be sure to keep the name lowercase and one word (no spaces and only alphabetic characters). For example, if I want to change mine to library, then:
+
+sudo mv /var/www/html/wordpress /var/www/html/library
+Step 6: Change File Ownership
+
+WordPress will need to write to files in the base directory. Assuming you are still in your base directory, run the following command, which assumes that my directory is still named /var/www/html/wordpress:
+
+sudo chown -R www-data:www-data /var/www/html/wordpress
+Step 7: Run the Install Script
+
+The next part of the process takes place in the browser. The location (URL) that you visit in the browser depends on your specific IP address and also includes the name of the directory in /var/www/html that we extracted WordPress to or that you renamed if you followed Step 5. Thus, if my IP address is 11.111.111.11 and I renamed my directory to library, then I need to visit the following URL:
+
+http://11.111.111.11/library/
+Or if that doesn't work (though it should), try:
+
+http://11.111.111.11/library/wp-admin/install.php
+IF I kept the directory named wordpress, then this is the URL that I use:
+
+http://11.111.111.11/wordpress/
+If you changed the name of your wordpress directory, be sure to substitute that name for wordpress in the URL.
+
+Finishing Installation
+
+From this point forward, the steps to complete the installation are exactly the steps you follow using WordPress's documentation.
+
+Most importantly, you should see a Welcome screen where you enter your site's information. The site Username and Password should not be the same as the username and password you used to create your WordPress database in MySQL. Rather, the username and password you enter here are for WordPress website users; i.e., those who will add content and manage the website.
+
+Two things to note:
+
+We have not setup Email on our servers. It's quite complicated to setup an email server correctly and securely, but it wouldn't work well without having a domain name setup anyway. So know that you probably should enter an email when setting up the user account, but it won't work.
+
+Second, when visiting your site, your browser may throw an error. Make sure that the URL is set to http and that it's not trying to access https. Setting up an https site also generally requires a domain name, but we are not doing that here. So if there are any problems accessing your site in the browser, be sure to check that the URL starts off with http.
 
 sudo a2ensite wordpress.conf
 sudo systemctl restart apache2
