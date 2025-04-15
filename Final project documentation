@@ -1,20 +1,58 @@
 Omeka Installation Reflection
-Installing Omeka involved a process like setting up the bare bones ILS and WordPress. First, I ensured all prerequisites were met, including updating the system, installing PHP, MySQL, and ImageMagick, and enabling the Apache mod rewrite module. I downloaded Omeka Classic using wget, extracted the files into /var/www/html, and renamed the folder for simplicity. Then, I created a new MySQL database and user specifically for Omeka to keep it separate from WordPress. I edited the db.ini file with my database credentials, adjusted file permissions with chown, and restarted Apache and MySQL services.
-I adapted my prior experience from the WordPress installation to confidently manage server-side steps such as configuring permissions, editing database credentials, and troubleshooting potential errors. Finally, I completed the setup through the Omeka web interface at http://34.134.86.249/omeka/, where I was able to access the admin dashboard and begin creating collections and items. Linking my WordPress site to Omeka via custom menus provided seamless integration between both platforms, demonstrating how foundational knowledge of web server configuration and CMS setup can be transferred across digital library systems.
+Installation Process
+Installing Omeka involved a process similar to setting up the bare bones of an ILS and WordPress. The steps included:
 
+Prerequisites:
 
+Updated system packages
 
+Installed PHP, MySQL, and ImageMagick
 
-During the Omeka installation process, one specific challenge I encountered was trying to create a functional link from my WordPress site to my Omeka digital library. Initially, I assumed this would be straightforward, but I had difficulty embedding a direct link from Omeka back to WordPress in a way that made sense for navigation. To resolve this, I reversed my approach—I added a custom menu link in Omeka that directed users to the WordPress site instead. This not only solved the issue but also maintained a clean user experience by keeping WordPress as the central hub.
-One thing that surprised me was the lack of detailed, beginner-friendly documentation for installing Omeka. Compared to WordPress, which has extensive guides and community support, Omeka’s installation process required more reliance on prior knowledge and problem-solving.
-Reflecting on this experience, I see how this component mirrors real-world library operations, where administrators often manage multiple platforms and digital services. The ability to troubleshoot, integrate systems, and adapt to different software environments is crucial for maintaining seamless access to digital collections and online exhibits in modern libraries.
+Enabled the Apache mod rewrite module
 
+Installation Steps:
 
+Download Omeka Classic:
+Use wget to download the package.
+
+Extract Files:
+Extract the files into /var/www/html and rename the folder for simplicity.
+
+Database Setup:
+Create a new MySQL database and user specifically for Omeka to keep it separate from WordPress.
+
+Configuration:
+Edit the db.ini file with your database credentials.
+
+Permissions:
+Adjust file permissions using chown.
+
+Restart Services:
+Restart Apache and MySQL services to apply the changes.
+
+Web Interface Setup:
+Complete the setup via the Omeka web interface at Omeka Public Site, access the admin dashboard, and begin creating collections and items.
+
+I adapted my prior experience from the WordPress installation to confidently manage server-side steps such as configuring permissions, editing database credentials, and troubleshooting potential errors. Finally, linking my WordPress site to Omeka via custom menus provided seamless integration between both platforms.
+
+Reflection on the Process
+During the Omeka installation process, one specific challenge was creating a functional link from my WordPress site to the Omeka digital library. Initially, I assumed embedding a direct link from Omeka back to WordPress would be straightforward. However, this approach presented navigation issues. The solution was to reverse the direction—adding a custom menu link in Omeka that directed users to the WordPress site instead. This adjustment not only solved the problem but also maintained a clean user experience by keeping WordPress as the central hub.
+
+Key Reflections:
+
+Documentation Gaps:
+I was surprised by the lack of detailed, beginner-friendly documentation for installing Omeka. In comparison, WordPress has extensive guides and community support.
+
+Real-World Application:
+This experience mirrors real-world library operations, where administrators manage multiple platforms and digital services. The ability to troubleshoot, integrate systems, and adapt to different software environments is crucial for maintaining seamless access to digital collections and online exhibits in modern libraries.
+
+Access Links
 Omeka Admin (for editing and managing content):
 http://34.134.86.249/omeka/admin/
 
 Omeka Public Site (for visitors):
-http://34.134.86.249/omeka/ 
+http://34.134.86.249/omeka/
 
-WordPress Site to Omeka Site :
-http://34.134.86.249/wordpress/   
+WordPress Site to Omeka Site:
+http://34.134.86.249/wordpress/
+
