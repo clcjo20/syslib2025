@@ -1,58 +1,49 @@
 Omeka Installation Reflection
-Installation Process
-Installing Omeka involved a process similar to setting up the bare bones of an ILS and WordPress. The steps included:
 
-Prerequisites:
+Installation Process
+Installing Omeka Classic involved a process similar to setting up the foundational layers of an ILS or WordPress site. The steps included:
+
+Prerequisites
 
 Updated system packages
-
 Installed PHP, MySQL, and ImageMagick
+Enabled the Apache mod_rewrite module
+Installation Steps
 
-Enabled the Apache mod rewrite module
-
-Installation Steps:
-
-Download Omeka Classic:
-Use wget to download the package.
-
-Extract Files:
-Extract the files into /var/www/html and rename the folder for simplicity.
-
-Database Setup:
-Create a new MySQL database and user specifically for Omeka to keep it separate from WordPress.
-
-Configuration:
-Edit the db.ini file with your database credentials.
-
-Permissions:
-Adjust file permissions using chown.
-
-Restart Services:
-Restart Apache and MySQL services to apply the changes.
-
-Web Interface Setup:
-Complete the setup via the Omeka web interface at Omeka Public Site, access the admin dashboard, and begin creating collections and items.
-
-I adapted my prior experience from the WordPress installation to confidently manage server-side steps such as configuring permissions, editing database credentials, and troubleshooting potential errors. Finally, linking my WordPress site to Omeka via custom menus provided seamless integration between both platforms.
+Download Omeka Classic
+Used wget to download the package from the official site.
+Extract Files
+Extracted files into /var/www/html/ and renamed the folder to simplify URL paths.
+Database Setup
+Created a new MySQL database and user specifically for Omeka to keep it isolated from the WordPress database.
+Configuration
+Edited the db.ini file with the appropriate database credentials.
+Permissions
+Adjusted file and folder permissions using chown to ensure proper ownership by the web server.
+Restart Services
+Restarted Apache and MySQL services to apply the changes.
+Web Interface Setup
+Completed installation via the browser-based setup.
+Accessed the admin dashboard and began creating collections and items.
+Integration with WordPress
+I applied knowledge from my WordPress setup to handle server-side configurations such as file permissions, database credentials, and troubleshooting issues. I also created a custom menu in WordPress linking to the Omeka site, allowing for a seamless user experience across both platforms.
 
 Reflection on the Process
-During the Omeka installation process, one specific challenge was creating a functional link from my WordPress site to the Omeka digital library. Initially, I assumed embedding a direct link from Omeka back to WordPress would be straightforward. However, this approach presented navigation issues. The solution was to reverse the direction—adding a custom menu link in Omeka that directed users to the WordPress site instead. This adjustment not only solved the problem but also maintained a clean user experience by keeping WordPress as the central hub.
+Navigation Integration Challenge
 
-Key Reflections:
+One specific challenge was linking Omeka and WordPress effectively. Initially, I tried embedding a direct link from Omeka back to WordPress, but this caused navigation inconsistencies.
 
+Solution: I reversed the flow—adding a custom menu link in Omeka that directed users to the WordPress homepage instead. This kept WordPress as the central hub and preserved a clean user experience.
+
+Key Reflections
 Documentation Gaps:
-I was surprised by the lack of detailed, beginner-friendly documentation for installing Omeka. In comparison, WordPress has extensive guides and community support.
-
+Omeka lacks beginner-friendly installation guides compared to the wealth of resources available for WordPress.
 Real-World Application:
-This experience mirrors real-world library operations, where administrators manage multiple platforms and digital services. The ability to troubleshoot, integrate systems, and adapt to different software environments is crucial for maintaining seamless access to digital collections and online exhibits in modern libraries.
-
+This process reflects the challenges real libraries face in managing multiple digital platforms. Being able to troubleshoot, integrate, and adapt to different tools is essential for running seamless library services and online exhibitions.
 Access Links
-Omeka Admin (for editing and managing content):
+Omeka Admin Dashboard:
 http://34.134.86.249/omeka/admin/
-
-Omeka Public Site (for visitors):
+Omeka Public Site:
 http://34.134.86.249/omeka/
-
-WordPress Site to Omeka Site:
+WordPress Site (Hub):
 http://34.134.86.249/wordpress/
-
