@@ -1,0 +1,43 @@
+week 13: Install Omeka Assignment 
+ 
+ Objective:
+ Install and configure Omeka as a digital library site and link it from your main WordPress website.
+ Instructions:
+ Use the foundational skills you developed while installing WordPress to complete this assignment. While some specific prerequisites are outlined in the course materials, much of the installation process will require you to apply what you've already learned. Your Omeka site should be operational and include at least one sample item or collection. Document the process on GitHub and make notes of any issues you encountered and how you resolved them. Use clearly structured Markdown for this.
+ Do not submit screenshots.
+ Deliverables:
+ •	A working URL for your Omeka installation.
+ •	A link from your WordPress site to your Omeka site.
+ •	A link to your GitHub notes/documentation.
+ •	A brief write-up (100-200 words) describing the installation process and how you adapted prior knowledge.
+ Evaluations of written components:
+ Submissions that demonstrate thoughtfulness, specificity, and depth of reflection are more likely to receive a Complete. Consider questions like:
+ •	Describe a specific problem you encountered and how you addressed it.
+ •	Identify one thing that surprised you or was different from a previous assignment.
+ •	Reflect on how this component contributes to real-world library operations.
+ 
+ 
+ 
+ Omeka Admin (for editing and managing content):
+ http://34.134.86.249/omeka/admin/
+ 
+ Omeka Public Site (for visitors):
+ http://34.134.86.249/omeka/ 
+ 
+ WordPress Site to Omeka Site :
+ http://34.134.86.249/wordpress/   
+ click on the link that says Link to Omeka Site and it will take you thpdated ere .
+ 
+ 	GitHub Documentation: https://github.com/clcjo20/syslib2025/blob/main/Final%20project%20documentation
+ 
+ Omeka Installation Reflection
+ Installing Omeka involved a process like setting up the bare bones ILS and WordPress. First, I ensured all prerequisites were met, including updating the system, installing PHP, MySQL, and ImageMagick, and enabling the Apache mod rewrite module. I downloaded Omeka Classic using wget, extracted the files into /var/www/html, and renamed the folder for simplicity. Then, I created a new MySQL database and user specifically for Omeka to keep it separate from WordPress. I edited the db.ini file with my database credentials, adjusted file permissions with chown, and restarted Apache and MySQL services.
+ I adapted my prior experience from the WordPress installation to confidently manage server-side steps such as configuring permissions, editing database credentials, and troubleshooting potential errors. Finally, I completed the setup through the Omeka web interface at http://34.134.86.249/omeka/, where I was able to access the admin dashboard and begin creating collections and items. Linking my WordPress site to Omeka via custom menus provided seamless integration between both platforms, demonstrating how foundational knowledge of web server configuration and CMS setup can be transferred across digital library systems.
+ 
+ 
+ 
+ 
+ During the Omeka installation process, one specific challenge I encountered was trying to create a functional link from my WordPress site to my Omeka digital library. Initially, I assumed this would be straightforward, but I had difficulty embedding a direct link from Omeka back to WordPress in a way that made sense for navigation. To resolve this, I reversed my approach—I added a custom menu link in Omeka that directed users to the WordPress site instead. This not only solved the issue but also maintained a clean user experience by keeping WordPress as the central hub.
+ One thing that surprised me was the lack of detailed, beginner-friendly documentation for installing Omeka. Compared to WordPress, which has extensive guides and community support, Omeka’s installation process required more reliance on prior knowledge and problem-solving.
+ Reflecting on this experience, I see how this component mirrors real-world library operations, where administrators often manage multiple platforms and digital services. The ability to troubleshoot, integrate systems, and adapt to different software environments is crucial for maintaining seamless access to digital collections and online exhibits in modern libraries.
+ 
